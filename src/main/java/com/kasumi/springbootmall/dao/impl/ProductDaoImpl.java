@@ -1,15 +1,17 @@
 package com.kasumi.springbootmall.dao.impl;
 
 import com.kasumi.springbootmall.dao.ProductDao;
+import com.kasumi.springbootmall.dto.ProductRequest;
 import com.kasumi.springbootmall.model.Product;
 import com.kasumi.springbootmall.rowmapper.ProductRowMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Component;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Component
 public class ProductDaoImpl implements ProductDao {
@@ -31,5 +33,37 @@ public class ProductDaoImpl implements ProductDao {
         }else {
             return null;
         }
+    }
+
+    @Override
+    public Integer createProduct(ProductRequest productRequest) {
+
+        String sql = "INSERT INTO product(product_name, category, image_url, price, stock, " +
+                "description, created_date, last_modified_date) " +
+                "VALUES (:product_name, :category, :image_url, :price, :stock, " +
+                ":description, :createdDate, :lastModifiedDate)";
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("product_name", productRequest.getProduct_name());
+        map.put("category", productRequest.getCategory());
+        map.put("image_url", productRequest.getImage_url());
+        map.put("price", productRequest.getPrice());
+        map.put("stock", productRequest.getStock());
+        map.put("description", productRequest.getDescription());
+
+        Date now = new Date();
+        map.put("createdDate", now);
+        map.put("lastModifiedDate", now);
+
+        System.out.println(sql);
+
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+
+        namedParameterJdbcTemplate.update(sql, new MapSqlParameterSource(map), keyHolder);
+
+        int productId = keyHolder.getKey().intValue();
+
+        return productId;
+
     }
 }

@@ -41,6 +41,7 @@ select product_id, product_name, category, image_url, price, stock, description,
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
     <open-files>
+      <object connection-id="25ae53ad-e950-434c-b8cd-a49230d156e2" object-ref="consoles/Connection" />
       <object connection-id="25ae53ad-e950-434c-b8cd-a49230d156e2" object-ref="schemas/mall/tables/product" />
     </open-files>
   </component>
@@ -553,7 +554,13 @@ select product_id, product_name, category, image_url, price, stock, description,
     </general-settings>
   </component>
   <component name="DBNavigator.Project.StatementExecutionManager">
-    <execution-variables />
-    <execution-variable-types />
+    <execution-variables>
+      <file file-url="db://25ae53ad-e950-434c-b8cd-a49230d156e2/consoles/Connection">
+        <variable name="productid" data-type="LITERAL" />
+      </file>
+    </execution-variables>
+    <execution-variable-types>
+      <variable connection-id="25ae53ad-e950-434c-b8cd-a49230d156e2" name="productid" data-type="LITERAL" />
+    </execution-variable-types>
   </component>
 </project>
