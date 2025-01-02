@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 public class ProductRequest {
 
     @NotNull
-    private String category;
+    private ProductCategory category;
     private String description;
     @NotNull
     private String image_url;
@@ -18,11 +18,11 @@ public class ProductRequest {
     @NotNull
     private Integer stock;
 
-    public String getCategory() {
+    public ProductCategory getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(ProductCategory category) {
         this.category = category;
     }
 
